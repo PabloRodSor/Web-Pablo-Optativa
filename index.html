@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <!-- Rotating Earth Background -->
+    <div class="earth-container">
+        <div class="earth">
+            <div class="earth-lines">
+                <div class="earth-line"></div>
+                <div class="earth-line"></div>
+                <div class="earth-line"></div>
+                <div class="earth-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="glass-header">
+        <div class="logo">
+            <i class="fa-solid fa-cloud-sun-rain"></i> WeatherApp
+        </div>
+        <button id="menu-btn" class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Menú</h3>
+            <button id="close-sidebar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#" class="nav-link active" data-target="home-section"><i class="fa-solid fa-house"></i>
+                    Inicio</a></li>
+            <li><a href="#" class="nav-link" data-target="saved-section"><i class="fa-solid fa-heart"></i> Guardados</a>
+            </li>
+            <li><a href="#" class="nav-link" data-target="settings-section"><i class="fa-solid fa-gear"></i>
+                    Configuración</a></li>
+            <li><a href="#" class="nav-link" data-target="about-section"><i class="fa-solid fa-circle-info"></i> Acerca
+                    de</a></li>
+        </ul>
+    </aside>
+    <div id="overlay" class="overlay hidden"></div>
+
+    <main class="container">
+
+        <!-- SECTION: HOME -->
+        <section id="home-section" class="app-section">
+            <div class="glass-card search-card">
+                <div class="search-box">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" id="city-input" placeholder="Buscar ciudad...">
+                    <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+
+                <!-- Quick Access Chips -->
+                <div class="quick-access">
+                    <span class="chip" data-city="Madrid">Madrid</span>
+                    <span class="chip" data-city="Barcelona">Barcelona</span>
+                    <span class="chip" data-city="Londres">Londres</span>
+                    <span class="chip" data-city="Nueva York">Nueva York</span>
+                    <span class="chip" data-city="Tokio">Tokio</span>
+                </div>
+
+                <p id="error-message" class="error-msg"></p>
+            </div>
+
+            <div id="weather-container" class="weather-container hidden">
+                <div class="glass-card current-weather">
+                    <div class="weather-header">
+                        <h2 id="city-name">Madrid, ES</h2>
+                        <button id="save-btn" class="save-btn"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <p id="date">Lunes, 10 Feb 2026</p>
+                    <div class="weather-main">
+                        <div class="weather-icon">
+                            <i id="weather-icon-i" class="fa-solid fa-sun"></i>
+                        </div>
+                        <div class="temperature">
+                            <h1 id="temp">22°C</h1>
+                            <p id="description">Cielo despejado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-grid">
+                    <div class="glass-card property-card">
+                        <i class="fa-solid fa-droplet"></i>
+                        <div class="property-info">
+                            <span class="property-value" id="humidity">45%</span>
+                            <span class="property-label">Humedad</span>
+                        </div>
+                    </div>
+                    <div class="glass-card property-card">
+                        <i class="fa-solid fa-wind"></i>
+                        <div class="property-info">
+                            <span class="property-value" id="wind">12 km/h</span>
+                            <span class="property-label">Viento</span>
+                        </div>
+                    </div>
+                    <div class="glass-card property-card">
+                        <i class="fa-solid fa-temperature-three-quarters"></i>
+                        <div class="property-info">
+                            <span class="property-value" id="feels-like">24°C</span>
+                            <span class="property-label">Sensación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SAVED CITIES -->
+        <section id="saved-section" class="app-section hidden">
+            <div class="glass-card">
+                <h2><i class="fa-solid fa-heart"></i> Ciudades Guardadas</h2>
+                <div id="saved-list" class="saved-list">
+                    <p class="empty-msg">No tienes ciudades guardadas aún.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SETTINGS -->
+        <section id="settings-section" class="app-section hidden">
+            <div class="glass-card">
+                <h2><i class="fa-solid fa-gear"></i> Configuración</h2>
+                <div class="setting-item">
+                    <span>Unidad de temperatura</span>
+                    <button id="unit-toggle" class="unit-btn">
+                        <span id="unit-label">Celsius (°C)</span>
+                        <i class="fa-solid fa-repeat"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ABOUT -->
+        <section id="about-section" class="app-section hidden">
+            <div class="glass-card about-card">
+                <h2><i class="fa-solid fa-circle-info"></i> Acerca de</h2>
+                <p>Weather Dashboard Pro v1.0</p>
+                <p>Desarrollado con ❤️ usando HTML5, CSS3 Glassmorphism y JS Vanilla.</p>
+                <p>Datos proporcionados por OpenWeatherMap.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <div id="loader" class="loader hidden">
+            <div class="spinner"></div>
+        </div>
+        </section> <!-- End Home Section -->
+
+        <!-- SECTION: SAVED CITIES -->
+        <section id="saved-section" class="app-section hidden">
+            <div class="glass-card">
+                <h2><i class="fa-solid fa-heart"></i> Ciudades Guardadas</h2>
+                <div id="saved-list" class="saved-list">
+                    <!-- Favorites will be injected here -->
+                    <p class="empty-msg">No tienes ciudades guardadas aún.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SETTINGS -->
+        <section id="settings-section" class="app-section hidden">
+            <div class="glass-card">
+                <h2><i class="fa-solid fa-gear"></i> Configuración</h2>
+                <div class="setting-item">
+                    <span>Unidad de temperatura</span>
+                    <button id="unit-toggle" class="unit-btn">
+                        <span id="unit-label">Celsius (°C)</span>
+                        <i class="fa-solid fa-repeat"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ABOUT -->
+        <section id="about-section" class="app-section hidden">
+            <div class="glass-card about-card">
+                <h2><i class="fa-solid fa-circle-info"></i> Acerca de</h2>
+                <p>Weather Dashboard Pro v1.0</p>
+                <p>Desarrollado con ❤️ usando HTML5, CSS3 Glassmorphism y JS Vanilla.</p>
+                <p>Datos proporcionados por OpenWeatherMap.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
