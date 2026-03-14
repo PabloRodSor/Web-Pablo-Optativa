@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /404.html
 Allow: /
 
-Sitemap: https://pablorodsor.github.io/Web-Pablo-Optativa/sitemap.xml
+Sitemap: https://pablorodsor.github.io/sitemap.xml

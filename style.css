@@ -744,6 +744,7 @@ body {
 .chatbot-messages::-webkit-scrollbar {
     width: 6px;
 }
+
 .chatbot-messages::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
@@ -791,7 +792,7 @@ body {
 }
 
 .chatbot-input-container input::placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .chatbot-input-container button {
